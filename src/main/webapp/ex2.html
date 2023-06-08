@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UFT-8">
+<title>Insert title here</title>
+<script>
+	// fun(): //Uncaught ReferenceError
+	
+	//함수 vs 메서드, this
+	//함수(전역에 만들어진 함수)
+	let fun = function(){
+		alert('fun: hello'); //전역
+		
+		console.log(this);
+	}
+	
+	fun();
+	
+	//메서드(객체안에 만들어지는 함수)
+	//자바에서의 static method(함수를 대신할수있는) 
+	let obj = {meth : function(){
+						alert('method : hello');
+						console.log(this)
+				} //this라는 키워드를 쓰고싶을 떄 무조건 meth를 만들어야한다
+	}
+				
+	obj.meth();
+</script>
+</head>
+<body>
+
+</body>
+</html>

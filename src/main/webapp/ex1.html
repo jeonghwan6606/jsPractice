@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+ 	//출력용 API
+ 	//문자표시 : '', or "", ``->엔터키까지 인식 가능 
+ 	let x = 10;
+ 	alert('test');
+ 	console.log('console test');
+ 	console.log(`console test`);
+ 	//conxold.log()는 매개변수 여러개도 가능
+ 	console.log('구디','아카데미');
+ 	
+ 	//데이터 타입
+ 	//1) 값타입
+ 	let a = 10; // 변수 선언시 var, let, const 사용
+ 	//등호연산이 가능하다 문자도 값타입이기 떄문이다.
+	
+ 	let d2 = true;
+ 	
+ 	//2) 참조타입 중요!
+ 	let d = [4,5,1]; //객체 타입이 없어도 배열을 만들 수가있다(키값-키값)
+ 	let r = {id: 'admin', ages : 25, married:false}; // 객체만들기 (쓰는법 체크)
+ 	// 변수 안에다 코드도 넣을 수 있다
+ 	let f = function(){}; //cf) 매개변수에도 코드 혹은 함수를 넣을수있다. 1급 함수 lang, 함수형 프로그램(?)
+    //!콜백 함수  console.log(f)  코드 출력 f(); 코드 실행
+    
+    //특별한 값들
+    // infinity, NaN, undefined, null
+    let s1 = 1/0;
+    console.log("1.0 : ",  s1); //+ 안되는지 확인
+    console.log("1/0값의 타입: ", typeof(s1));
+    
+    let s2 = 0/0;
+    console.log('0/0 : ',s2);
+    console.log("0/0값의 타입: ", typeof(s2)); //nan 아닐때만 number로 변환해라 / nan도 숫자타입이긴함
+    
+    let s3 = null;	// null의 타입은 참조타입이다. typeof 는 object.
+    
+    let s4; // undefined
+    
+    //랩퍼(박싱)타입
+    let xx = 'test';
+    console.log('xx.length : ', xx.length);
+    console.log('xx.substring() : ', xx.substring(2)); // x를 참조문자타입으로(오토박싱) 변경후 매소드를 실행한 것이다..
+    
+    //객체 안에 코드
+    let obj = {name: '구디', play: function(){alert('s놀다');}}
+    //console.log(obj['plaly']);  []참조 연산자도 가능
+    console.log('ovj play 매서드 : ', obj.play);
+    obj.play();
+    
+    //상황연산자 
+    //boolean ? 참일 때 실행 코드: 거짓일때 실행코드;
+    let x2 = 7;
+    x2%2 == 1? console.log('홀수')	: console.log('짝수');
+    
+    //foreach: for..in , for...of
+    let arr = ["하명진","이재성","조동욱"];
+    
+   for(let i in arr){
+	   console.log(i); // of를 쓰면 배열의 값들 출력,  in은 인덱스 출력
+ 	   console.log(arr[i]);
+ 	   console.log(arr.i); // 참조연산자 뒤에 변수는 쓸 수 없다. check
+   }
+  
+    let obj2 = {id:'goodee' , age:12, oper:true}; // id, age,oper 가 속성값 인덱스와 비슷 따라서 in으로 출력하면 속성값 출력
+    
+    //배열
+    let arr2 = []; //let arr = new Array();
+    arr.push('하'); // arrayList처럼 동적으로 늘어난다.
+    
+    //객체: 동적객체(객체 생성 후에도 속성/메서드가 추가가 가능하다)
+    let user = {id:1, name: 'goodee'};
+    console.log(user);
+    user.pw = '1234'; //동적으로 속성/메서드 추가가 가능하다
+    console.log(user);
+    
+    //속성 접근 방법
+    let user2 = {
+    			id:1,
+    			name: 'goodee',
+    			eat: function(){
+    				console.log('먹다');
+    			}
+    };
+    //[] 참조연산자, 속성(메서드)이름은 문자
+    console.log('name :', user2['name']) ;
+    //. 참조연산자 사용도 가능
+    console.log("name : ", user2.name);
+    
+    //메서드 호출 
+    user2['eat']();
+    user2.eat();
+    let user3 = {
+    		id: 1, //숫자타입
+    		name: 'goodee', //문자타입
+    		oper: true, //블타입
+    		loc : ['본관','별관'], //배열타입
+    		print : function(){
+    			console.log('안녕하세요', +this.name+'입니다.'); //this check
+    			console.log(`안녕하세요. ${this.name}입니다.`); //``백틱(백따옴표) 사용시
+    		}//코드타입(함수타입): 객체안의 함수를 메서드(자바에서는 메서드만 존재)
+    			
+    }
+    	
+  //배열의 속성과 메서드	
+  let arr3 = []; // let arr = new Array();
+  arr[o] = '루피'; //arr.push('루피') push메서드를 사용하면 index 숫자를 직접 입력하지 않아도 된다
+  arr[1] = '나미';
+  
+  console.log(arr.length); //배열의 길이
+  console.log(arr); // console.log()메서드는 단순 출력 메서드가 아니고 매개값을 분석해서 리포트가 같이 출력된다
+  
+  //자주사용되는 배열 메서드
+  //1)push() // stack자료구조 삽입 메서드
+  let rt1 = arr.push('조로');
+  console.log('push 반환타입: ', rt1); //length
+  console.log(arr); 
+  
+  //2) pop() // stack자료구조 추출 메서드
+  let rt2 = arr.pop(); //check
+  console.log('pop 반환타입:'. rt2);
+  console.log(arr);
+  
+  //3)unshift() : push 반대 삽입 메서드
+  let rt3 = arr.unshift('에이스');
+  console.log('unshift 반환 타입:', rt3);
+  console.log(arr);
+  
+  //4)shift() : queue자료구조 추출(앞) 메서드
+   let rt4 = arr.shift(); 
+  console.log('shift 반환 타입:', rt4);
+  console.log(arr);
+  
+  //5)slice
+  
+  let arr4 = [3,6,7,8,9,10,2];
+  let rt5_1 = arr2.slice(5); //10,9,8
+  console.log('slice(x) 반환타입 :', rt5_1);
+  console.log(arr2); //arr자체가 잘리는건 아니다
+  
+  let rt5_2 = arr2.slice(5,7); //10,9
+  console.log('slice(x,y) 반환타입 :', rt5_2);
+  console.log(arr2); //arr자체가 잘리는건 아니다
+  
+  //6) concat
+  let arr5 = [1,3];
+  let arr6 = [2,4];
+  let rt6 = arr5.concat(arr6);
+  console.log(rt6);
+  console.log(arr3); // 원본유지
+  
+  //7) forEach
+  let arr7 = ['루피','상디','나미'];
+  //함수도 변수에 저장된다 ->매개값으로 보낼 수 있따-> 1급함수 랭기쥐
+  let param = function(x){console.log(x);}; //let x 
+  let rt7 = arr7.forEach(param); //forEach는 arr7의 랭스만큼 반복한다
+  //매개값으로 들어온 함수의 첫번쨰 매개값으로 배열의 요소값을 전달한다
+  console.log(rt7); //foreach 반환값은 void다 : undefined
+  
+  //변수를 사용하지 않고 익명함수값으로 입력
+  rt7 = arr5.forEach(function(x){console.log(x);});
+  
+  //8)join
+  let rt8 = arr7.join();
+  console.log(rt8); // 반환타입 배열0-> 문자(토큰 디폴트문자는,)
+  console.log(arr5); //원본유지
+  rt8 = arr5.join('-'); //디폴트 토큰문자는 .
+  
+  //9)reverse
+  let arr9 = [1,3,5,7,9];
+  let rt9 = arr9.reverse();
+  console.log(rt9);
+  console.log(arr9); //주의! : 반환타입도 원본도 뒤집어졌다.
+  
+  //응용-로또프로그램
+  let balls = [];
+  for(let i = 0; i<45; i+=1){
+	  balls[i] = i+1;
+  }
+  console.log(balls); // 서버에 저장 없이 바로 실행시키면서 유저페이지에서 보여주면서 실행 보안성 낮음
+  
+ for(let i = 0; i<1000000; i+=1){
+	 let r = Math.floor(Math.random() * balls.length);
+	 let temp = balls[0];
+	 balls[0] = balls[r];
+	 balls[r] = temp;
+ }
+  let lottoBall = ball.sclice(0,6);
+  console.log(lottoBall);
+  
+  //함수 vs 메서드, this 
+  
+  //함수(전역에 만들어진 함수)
+  let fun = function(){
+	  alert('hello');
+  };
+  
+  fun();
+</script>
+<body>
+
+</body>
+</html>
