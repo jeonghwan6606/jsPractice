@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	/*
+		객체를 생성하는 방법
+		1. 객체 리터럴(상수){}를 사용
+		2. class 문법을사용
+		3. this와 new연산자를 사용하는 함수(생성자 함수)
+		4. 익명 생성자 함수를 사용하는 방법
+		5. 일반함수를 사용하는 방법
+	*/
+	//1.객체 리터럴({}) 사용.
+	let a = {};
+	a.id = 'goodee'	;
+	a.birth = 2012;
+	a.address = '금천구';
+	
+	let b = {id: 'goodee', 
+			birth: 2012, 
+			address:'금천구',
+			greet:function(){alert('hello')}
+	};
+	
+	//2.class문법(ECMAS)
+	class User{
+		constructor(){ //생성자 함수 + new 연산자 
+			this.id = null;//생성자 안에 디스는 new를 가리킨다
+			this.age = 2012;
+			this.test = function(){};
+		}
+		greet(){
+			alert(this.id+'hello');
+		}
+	}
+	
+	let u = new User();
+	u2.id = 'ace';
+	alert('user:'+u.id);
+	u.greet();
+	
+	//함수: 자바스크립트의 함수
+	console.log(typeof(function(){}));// function type
+	//함수도 참조타입이고 모든 참조타입 객체이다.
+	
+	let a = function(x,y){
+		return x+y;
+	};
+	
+	console.log(a);
+	let result = a(1,3);//()함수호출연산자와 함께 사용하면 함수 실행
+	
+	console.log('result : ', result);// 4
+	
+	(function(){alert('test')})(); //익명함수 호출
+	
+	//매개변수가 있는 익명함수 호출 
+	(function(x,y){alert(x+y);})('goodee','hello'); 
+	
+	let b2 = a;
+	let result2 = b(7,10);
+	console.log('result2: '+ result2);
+	
+	//함수는 객체다. 객체는 동적으로 속성추가가 가능하다
+	console.log(typeof(b2)); //function
+	//함수에도 속성추가가 가능하다
+	b2.nicname = '구디아카데미 함수';
+	console.log('b2.nicname : ', b2.nicname);
+	//함수에 메서드(속성)도 추가 가능하다
+	b2.play = function(){console.log('놀다')};
+	b2.play();
+	
+	let arr = {
+			function(){console.log('첫번쨰 배열 함수')},
+			function(){console.log('두번쨰 배열 함수')},
+			function(){console.log('세번쨰 배열 함수')},
+	};
+	
+	arr.forEach(function(item){
+		  console.log(idx); //0,1,2
+		  item();
+	}); //자바에서는 오버로딩(?) 매개값이 다르면 다른 매소드로 인지
+	//매개함수의 첫번째 매개값 배열요소, 두번쨰 index
+	
+	
+	//1급함수: 함수코드가 변수에 저장 -> 리턴값, 매개값(콜백함수)
+	let c = function(){
+		let d ='ccc';
+		console.log(d)
+		let e = function(){
+			console.log('eee');
+		}
+		return e;
+	};
+	let f = c(); ///ccc c함수를 실행시키면서 나오는 결과값을 보여주면서+ e라는 함수를 반환
+	f(); // 따라서 f는 e라는 함수를 담은 객체가 되고 f는 곧 함수가 되어서 f를 실행시키면 e를 실행시킨 'eee'
+	
+	c()(); // ccc eee
+	
+	//매개값
+	let g = function(fun){
+		fun();
+	};
+	
+	let odd = function(){
+		alert('짝수 입니다');
+	};
+	
+	let even = function(){
+		alert('홀수 입니다');
+	};
+	
+	let param = null;
+	let num = 7;
+	if(num%2==0){
+		param = even;
+	}else{
+		param = odd;
+	}
+	g(pram);
+</script>
+</head>
+<body>
+	
+	
+</body>
+</html>

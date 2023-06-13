@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+    div     {width:120px;height:120px;
+            border:1px solid gray;
+            display:table; float:left;
+            margin-right:5px;}
+   
+    p       {font-size:50px;
+            display:table-cell;
+            text-align:center;
+            vertical-align:middle;}
+   
+    nav     {clear:both;
+            text-align:center;
+            width:884px;}
+   
+    #orange {background-color:orange;} 
+    #yellow {background-color:yellow;} 
+    #green  {background-color:green;}  
+    #blue   {background-color:blue;}   
+    #navy   {background-color:navy;}   
+    #purple {background-color:purple;}     
+</style>
+</head>
+<body>
+	<h1>로또 생성기</h1>
+
+    <div id="orange"><p id="orange_num">0</p></div>
+    <div id="yellow"><p id="yellow_num">0</p></div>
+    <div id="green"><p id="green_num">0</p></div>
+    <div id="blue"><p id="blue_num">0</p></div>
+    <div id="navy"><p id="navy_num">0</p></div>
+    <div id="purple"><p id="purple_num">0</p></div>
+	
+	<button id="playBtn" type="button">play</button>
+	
+</body>
+<script>
+	// 로또배열을 만드는 함수
+	let randomArray = function(n) {
+		let resultArr = [];
+		
+		let arr = new Array(45); // arr = []
+		for(let i=0; i<arr.length; i+=1) {
+			arr[i] = i+1;
+		}
+		
+		// shuffle 로직(알고리즘)
+		for(let i=0; i<100000; i+=1) {
+			// 1) 0번째 값을 임시변수에 저장
+			let temp = arr[0];
+			// 2) 랜덤번째 값을 0번째 복사
+			let ranNum = Math.floor(Math.random()*45); // 0.0 부터 45미만의 실수를 구해서 버림
+			arr[0] = arr[ranNum];
+			// 3) 임시변수의 값(원본의 0번째 값)을 랜덤번째에 복사
+			arr[ranNum] = temp;
+		}
+		
+		resultArr = arr.slice(0, n);
+		
+		return resultArr; // n개의 숫자(1~45) 배열을 반환
+	};
+	
+	let lotto = randomArray(6);
+	
+	console.log(lotto); // 디버깅
+	
+	// DOM TREE API 사용
+	// document.getElementById('id이름');
+	// document.getElementsByTagName('태그이름');
+	// document.getElementsByClassName('클래스이름');
+	// HTML5 랩핑된 API
+	// document.querySelector('id이름/태그이름/클래스이름')
+	/*
+	document.querySelector('#orange_num').innerHTML = lotto[0];
+	document.querySelector('#yellow_num').innerHTML = lotto[1];
+	document.querySelector('#green_num').innerHTML = lotto[2];
+	document.querySelector('#blue_num').innerHTML = lotto[3];
+	document.querySelector('#navy_num').innerHTML = lotto[4];
+	document.querySelector('#purple_num').innerHTML = lotto[5];
+	*/
+	
+	// TIME API
+	// 특정시간후에 한번 실행하는 함수
+	// setTimeout(실행코드:함수, 시간:ms); // 1번실행
+	//setTimeout(function(){console.log('goodee');}, 1000); // 1초후에 1번 출력
+	
+	// 무한루프 함수
+	// setInterval(실행코드:함수, 시간:ms); // 무한루프실행
+	/*
+	let f = function(){
+				console.log(Math.random());
+			};
+	setInterval(f, 1000);
+	*/
+	//let sv = setInterval(function(){console.log(Math.random());}, 1000); // 1초마다 계속 출력
+	
+	// function(){} / ()=>{}
+	// 화살표 함수 표현방식 사용 가능
+	// setIntval(()=>{console.log(Math.random());}, 1000);
+	
+	
+	// 무한루프를 중지시키는 함수
+	// clearInterval(setInterval의 반환값, 시간:ms)
+	// clearInterval(sv); // 바로중지되면 setInterval 확인 불가
+	// setTimeout(function(){clearInterval(sv);}, 10*1000);
+	
+	
+	// 웹브라우저 이벤트(ex:버턴클릭) 콜백함수 : addEventListener메서드
+	// 이벤트객체.addEventListener('이벤트이름', 실행코드:함수);
+	let playBtn = document.querySelector('#playBtn');
+	
+	playBtn.addEventListener('click', function(){
+		// 여섯개의 p태그안에 0.05초단위로 번호를 변경하는 무한루프
+		let orangeLoop = setInterval(function(){
+			document.querySelector('#orange_num').innerHTML 
+				= Math.floor(Math.random()*45)+1;
+		},50);
+		let yellowLoop = setInterval(function(){
+			document.querySelector('#yellow_num').innerHTML 
+				= Math.floor(Math.random()*45)+1;
+		},50);
+		let greenLoop = setInterval(function(){
+			document.querySelector('#green_num').innerHTML 
+				= Math.floor(Math.random()*45)+1;
+		},50);
+		let blueLoop = setInterval(function(){
+			document.querySelector('#blue_num').innerHTML 
+				= Math.floor(Math.random()*45)+1;
+		},50);
+		let navyLoop = setInterval(function(){
+			document.querySelector('#navy_num').innerHTML 
+				= Math.floor(Math.random()*45)+1;
+		},50);
+		let purpleLoop = setInterval(function(){
+			document.querySelector('#purple_num').innerHTML 
+				= Math.floor(Math.random()*45)+1;
+		},50);
+		
+		// 번호변경 무한루프를 중지하면서 배열에 만들어진 로또번호를 출력하는 코드
+		setTimeout(function(){
+			clearInterval(orangeLoop);
+			document.querySelector('#orange_num').innerHTML = lotto[0];	
+		},1*1000);
+		
+		setTimeout(function(){
+			clearInterval(yellowLoop);
+			document.querySelector('#yellow_num').innerHTML = lotto[1];	
+		},2*1000);
+		
+		setTimeout(function(){
+			clearInterval(greenLoop);
+			document.querySelector('#green_num').innerHTML = lotto[2];	
+		},3*1000);
+		
+		setTimeout(function(){
+			clearInterval(blueLoop);
+			document.querySelector('#blue_num').innerHTML = lotto[3];	
+		},4*1000);
+		
+		setTimeout(function(){
+			clearInterval(navyLoop);
+			document.querySelector('#navy_num').innerHTML = lotto[4];	
+		},5*1000);
+		
+		setTimeout(function(){
+			clearInterval(purpleLoop); // purpleLoop중지 코드
+			document.querySelector('#purple_num').innerHTML = lotto[5];	
+		},6*1000);
+	});
+	
+</script>
+</html>
