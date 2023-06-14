@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+   <input type="text" id="title" value="구디아카데미">
+   
+   <input type="checkbox" class="hobby" id="hobby" value="야구">야구
+   <input type="checkbox" class="hobby" id="hobby" value="축구">축구
+   <input type="checkbox" class="hobby" id="hobby" value="클라이밍">클라이밍
+   <button type="button" id="hobbyBtn">취미 유효성 검사</button>
+   <script>
+      // DOM API
+      console.log(document.getElementById('title').value);
+      // CSS 선택자가 사용가능한 DOM API
+      console.log(document.querySelector('#title').value);
+      // jQuery API를 사용
+      console.log(jQuery('#title').val());
+      // jQuery API를 사용(축약형) : jQuery == $
+      // let title = $('#title');
+      console.log($('#title').val());
+      
+      let ck = document.getElementById('hobby'); //document.querySelector('#hobby')
+      console.log('typeof ck : ', typeof ck);
+      console.log('ck length: ', ck.length);
+      
+      let ck2 = document.getElementsByClassName('hobby'); // document.querySelectorAll('.hobby')
+      console.log('typeof ck2 : ', typeof ck2);
+      console.log('ck2 length: ', ck2.length);
+ 
+      let ck3 = document.querySelectorAll('.hobby');
+      console.log('typeof ck3 : ', typeof ck3);
+      console.log('ck3 length: ', ck3.length);
+      
+      console.log("$('.hobby').length: ", $('.hobby').length);
+      
+      console.log('체크된 hobby count : ', $('.hobby:checked').length);
+      
+      // DOM API 사용
+      /*
+      document.querySelector('#hobbyBtn').addEventListener('click', function(){
+         if(document.querySelectorAll('.hobby:checked').length < 2) {
+            alert('취미는 2개이상 선택하세요');
+         } else {
+            let str = "";
+            for(let i=0; i<document.querySelectorAll('.hobby:checked').length;i+=1) {
+               str += (document.querySelectorAll('.hobby:checked')[i].value+',');
+            }
+            alert(str);
+         }
+      });
+      */
+      // jQuery 사용
+      $('#hobbyBtn').click(function(){
+         if($('.hobby:checked').length < 2) {
+            alert('취미는 2개이상 선택하세요');
+         } else {
+            let str = "";
+            // jQuery 문법 : $(배열).each(function(index, item){});
+            $('.hobby:checked').each(function(index, item){
+               str += $(item).val()+',';
+            });
+            alert(str);
+            
+            // 내장 문법
+            //   배열.forEach(function(item, idex){})
+            
+         }
+      });
+   </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>test1</h1>
+	
+	<script>
+		// 전역(window) 함수
+		window.alert('전역함수호출'); // 전역이름은 생략가능
+	</script>
+	
+	<script>
+		// window.document 객체의 메서드
+		// window.document.write('document 객체의 메서드 호출'); // document객체안의 write메서드
+		document.write('document 객체의 메서드 호출');
+		document.write('<h2>document 객체의 메서드 호출</h2>');
+		// window.document 객체의 속성
+		document.body.style.background = "red";
+		
+		// 시간과 관련된 전역함수 setTimeout(실행코드, ms);
+		setTimeout(function(){
+			document.body.style.background = "";
+		}, 5*1000);
+		
+		// window.document 객체의 메서드 querySelector
+		// let gdBtn = document.querySelector('#gdBtn'); // gdBtn이 없어서 null이 대입
+		// console.log(gdBtn);
+	</script>
+	
+	<h1>test2</h1>
+	<button id="gdBtn" type="button">구디아카데미</button>
+	<button id="backBtn" type="button">뒤로가기</button>
+	<script>
+		let gdBtn = document.querySelector('#gdBtn'); // gdBtn이 없어서 null이 대입
+		console.log(gdBtn);
+		// 돔객체.addEventListener('이벤트이름', 실행코드함수)
+		gdBtn.addEventListener('click', function(){
+			// BOM window.location객체
+			location.href = 'http://www.gdu.co.kr'; // location -> 웹브라우저 주소창
+		});
+		
+		document.querySelector('#backBtn').addEventListener('click',function(){
+			// BOM window.history객체
+			history.back();
+		});
+	</script>
+</body>
+</html>

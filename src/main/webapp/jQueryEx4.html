@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+   $(document).ready(function(){
+      $('#id').blur(function(){
+         if(isNaN($('#id').val()) == false) { // 숫자값이면
+            $('#idHelp').text('숫자만으로 id를 사용할 수 없습니다'); // text() : getter, text(매개값) : setter
+            $('#id').val(''); // val() : getter, val(매개값) : setter
+            $('#id').focus();
+            return;
+         } else {
+            $('#idHelp').text('');
+         }
+      });
+      
+      $('#lang').change(function(){
+         $('#langOutput').val($('#lang').val());
+      });
+   });
+
+</script>
+</head>
+<body>
+   <div>
+      <select id="lang">
+         <option value="">언어선택</option>
+         <option value="java">java</option>
+         <option value="python">python</option>
+      </select>
+      <input type="text" id="langOutput" readonly="readonly">
+   </div>
+   <div>
+      <!-- blur -->
+      blur : <input type="text" id="id" value=""><span id="idHelp"></span>
+   </div>
+   <div>
+      test : <input type="text" id="test">
+   </div>
+</body>
+</html>
