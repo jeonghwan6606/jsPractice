@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+</head>
+<body>
+   <button type="button" id="btn1">ajax비동기요청</button>
+   <div>
+      <div>id : <input type="text" id="id" readonly="readonly"></div>
+      <div>pw : <input type="text" id="pw" readonly="readonly"></div>
+   </div>
+   <script>
+      $('#btn1').click(function(){
+         $.ajax({
+            url : './data.json', // xml, json 파일 또는 이런 파일을 반환하는 api호출
+            type : 'get',
+            success : function(param){ 
+               // param -> data.json파일X -> data.json파일 해석 후 자바스크립트코드(객체) 변경한 타입
+               alert('비동기 호출 성공');
+               console.log(param);
+               $('#id').val(param.id);
+               $('#pw').val(param.pw);
+            }, // api호출이 성공했을때 실행되는 콜백함수
+            error : function(param) {
+               alert('비동기 호출 실패');
+            } // api호출이 실패했을때 실행되는 콜백함수
+         });      
+      });
+   </script>
+</body>
+</html>

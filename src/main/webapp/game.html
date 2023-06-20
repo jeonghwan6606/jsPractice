@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	let count = 0; // 가위바위보 시도회수
+	let currentStair = 0; // 현재 위치한 층수
+	
+	// 1) 시도회수 출력
+	$('#count').val(count); // 
+	// jquery setter / getter
+	/*
+		<input> : .val(매개값) / val()
+		태그사이에 문자열 : .text(매개값) / text()
+		태그사이에 태그 : .html(매개값) / html()
+	*/
+	
+	// 2) 가위바위보 진행
+	// 선택자가 클래스이름이면 반환타입은 배열이다 
+	$('#playBtn').click(function() {
+		console.log('length : ',  $('.rsp:checked').length);
+		if($('.rsp:checked').length == 0) {
+			alert('가위/바위/보 중 하나를 선택하세요');
+			return; // 버턴 클릭 콜백 종료
+		}
+		// 선택했으면(사용자의 선택)
+		let userRspVal = $($('.rsp:checked')[0]).val();
+		console.log('userRspVal : ', userRspVal);
+		
+		// 시스템의 선택
+		let sysRsp = ['가위', '바위', '보'];
+		let sysRspVal = sysRsp[Math.floor(Math.random()*3)];
+		console.log('sysRspVal : ', sysRspVal);
+		
+		count += 1; // 카운트 1증가
+		$('#count').val(count);
+		
+		// 승/패
+		if(userRspVal == sysRspVal) {
+			console.log('비김');
+			$('#playLog').val('비김 '+currentStair+'층');
+		} else if((userRspVal == '가위' && sysRspVal =='보')  
+					|| (userRspVal == '바위' && sysRspVal =='가위')
+					|| (userRspVal == '보' && sysRspVal =='바위')) {
+			
+			
+			// 이전층 케릭터 삭제
+			$('#s'+currentStair).html('&nbsp;');
+			// 현재층 1 증가
+			currentStair += 1;
+			// 현재층 케릭터 추가
+			$('#s'+currentStair).html('&#127939;');
+			
+			console.log('이김');
+			$('#playLog').val('이김 '+currentStair+'층');
+			
+			if(currentStair == 7) {
+				alert('게임종료. 시도회수 : '+count+'회');
+				// 페이지 새로고침
+				location.reload();
+				return;
+			}
+		} else {
+			console.log('짐');
+			$('#playLog').val('짐 '+currentStair+'층');
+		}
+		
+		
+	});
+});
+</script>
+</head>
+<body>
+	<h1>계단 게임</h1>
+	<form>
+		<fieldset>
+			<legend>가위/바위/보</legend>
+			<input type="text" id="count" readonly="readonly">번째 : 
+			<input type="radio" name="rsp" class="rsp" value="가위">가위
+			<input type="radio" name="rsp" class="rsp" value="바위">바위
+			<input type="radio" name="rsp" class="rsp" value="보">보
+			<button type="button" id="playBtn">play</button>
+			<div>log</div>
+			<div>
+				<textarea id="playLog" rows="10" cols="60" readonly="readonly"></textarea>
+			</div>
+		</fieldset>
+	</form>
+	<br>
+	<table border="1">
+		<tr>
+			<td style="width:50px; background-color: purple;">
+				<span id="s7">&nbsp;</span>
+			</td>
+			<td rowspan="7" style="text-align: center; vertical-align: bottom;">
+				<span id="s0">&#127939;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: navy;">
+				<span id="s6">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: blue;">
+				<span id="s5">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: green;">
+				<span id="s4">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: yellow;">
+				<span id="s3">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: orange;">
+				<span id="s2">&nbsp;</span>
+			</td>
+		</tr>
+		<tr>
+			<td style="background-color: red;">
+				<span id="s1">&nbsp;</span>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
